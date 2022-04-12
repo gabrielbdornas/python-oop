@@ -27,10 +27,10 @@
 
 empl_gabriel = Employee()
 empl_maria = Employee()
-empl_jose = Employee() """
+empl_jose = Employee()
 
 # Únicos em diferentes locais na memória
-""" print(empl_gabriel)
+print(empl_gabriel)
 print(empl_maria)
 print(empl_jose) """
 
@@ -48,14 +48,15 @@ empl_maria.last_name = 'José'
 empl_maria.email = 'maria.jose@company.com'
 empl_maria.pay = 60000
 
-empl_jose.first_name = 'Jose'
+empl_jose.first_name = 'José'
 empl_jose.last_name = 'Maria'
 empl_jose.email = 'jose.maria@company.com'
 empl_jose.pay = 40000
 
-print(empl_gabriel.email)
-print(empl_maria.email)
-print(empl_jose.email) """
+print(empl_gabriel.first_name)
+print(empl_maria.first_name)
+print(empl_jose.first_name) """
+
 
 # 2 -  Variáveis de instâncias são variáveis únicas para cada instância de uma classe
 
@@ -94,7 +95,7 @@ print(f'{empl_jose.first_name} recebe R${empl_jose.pay}') """
 # 4 - Full Name: Nosso primeiro método de classe
   # Possível realizar manualmente
 
-class Employee:
+""" class Employee:
 
   def __init__(self, first_name, last_name, pay):
     self.first_name = first_name
@@ -110,11 +111,11 @@ empl_maria = Employee('maria', 'josé', 60000)
 empl_jose = Employee('josé', 'maria', 40000)
 
 # Não esqueça do parênteses após full_name pois isto é um método e não um atributo
-""" print(empl_gabriel.first_name)
+print(empl_gabriel.first_name)
 print(empl_maria.first_name)
-print(empl_jose.first_name)
+print(empl_jose.first_name) """
 
-print(empl_gabriel.full_name())
+""" print(empl_gabriel.full_name())
 print(empl_maria.full_name())
 print(empl_jose.full_name()) """
 
@@ -123,11 +124,10 @@ print(empl_jose.full_name()) """
 # Cuidado: Não esqueça o primeiro argumento de métodos de classe - self
 
 # Print para mostrar que é a mesma coisa
-print(Employee.full_name(empl_gabriel)) # Aqui chamo o método pela classe e ele não sabe qual instância desejo
-print(empl_gabriel.full_name()) # Passa self automaticamente
+""" print(Employee.full_name(empl_gabriel)) # Aqui chamo o método pela classe e ele não sabe qual instância desejo
+print(empl_gabriel.full_name()) # Passa self automaticamente """
 
 # Resumo
   # Criamos nossa primeira classe
   # Criamos instâncias dessa classe
-  # Criamos classes atributos e métodos
-
+  # Criamos instâncias atributos e métodos
