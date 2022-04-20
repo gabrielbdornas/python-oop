@@ -2,31 +2,30 @@
     # Classe: compartilhada entre todas as instâncias da classe
     # Instância: Únicas em cada instância
 
-# 1 - Criando classes variáveis
+# 1 - Criando variáveis de classe
 
 class Employee:
 
-    raise_amount = 1.05
-    total_employees = 0
+  raise_amount = 1.05
+  employee_count = 0
 
-    def __init__(self, first_name, last_name, pay):
-        self.first_name = first_name
-        self.last_name = last_name
-        self.email = f'{first_name.lower()}.{last_name.lower()}@company.com'
-        self.pay = pay
-        Employee.total_employees += 1
+  def __init__(self, first_name, last_name, pay):
+    self.first_name = first_name
+    self.last_name = last_name
+    self.email = f'{first_name.lower()}.{last_name.lower()}@company.com'
+    self.pay = pay
+    Employee.employee_count += 1
 
-    def full_name(self):
-        return f'{self.first_name.capitalize()} {self.last_name.capitalize()}'
+  def full_name(self):
+    return f'{self.first_name} {self.last_name}'
 
-    def apply_raise(self):
-        self.pay = int(self.pay * self.raise_amount)
+  def raise_pay(self):
+      self.pay = self.pay * Employee.raise_amount
 
-# Não será necessário utilizar self como primeiro argumento durante criação da instância
-# Não precisamos mais das instâncias e atributos definidas manualmente anteriormente
-empl_gabriel = Employee('Gabriel', 'Dornas', 50000)
-print(Employee.total_employees)
-empl_maria = Employee('Maria', 'José', 60000)
-print(Employee.total_employees)
-empl_jose = Employee('José', 'Maria', 40000)
-print(Employee.total_employees)
+empl_1 = Employee('Gabriel', 'Dornas', 50000)
+empl_2 = Employee('Maria', 'Jose', 6000)
+empl_3 = Employee('Jose', 'Maria', 4000)
+empl_4 = Employee('João', 'Santos', 70000)
+
+print(Employee.employee_count)
+

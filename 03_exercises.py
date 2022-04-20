@@ -17,48 +17,83 @@
 
 # Variável de Classe com a contagem dos alunos
 
-class Alunos:
+# Método de classe para criar alunos a partir de um arquivo csv
 
-    num_alunos = 0
+# Método estático para falar se hoje é dia de aula
 
-    def __init__(self, nome, sobrenome, idade, genero, nota_portugues, nota_matematica, nota_historia):
+class Alunos():
+
+    alunos_count = 0
+
+    def __init__(self, nome, sobrenome, idade, genero, nota_portugues, nota_matematica):
         self.nome = nome
         self.sobrenome = sobrenome
-        self.idade = idade
+        self.idade = int(idade)
         self.genero = genero
-        self.nota_portugues = nota_portugues
-        self.nota_matematica = nota_matematica
-        self.nota_historia = nota_historia
+        self.nota_portugues = int(nota_portugues)
+        self.nota_matematica = int(nota_matematica)
 
-        Alunos.num_alunos +=1
+        Alunos.alunos_count += 1
 
     def nome_completo(self):
-        return f'{self.nome} {self.sobrenome}'
+        return f'{self.nome.upper()} {self.sobrenome.upper()}'
 
-    def add_nota(self, materia, nota):
+    def ad_notas(self, materia, nota):
         if materia == 'Português':
             self.nota_portugues += nota
         elif materia == 'Matemática':
             self.nota_matematica += nota
-        elif materia == 'História':
-            self.nota_historia += nota
 
     def passou_de_ano(self):
-        if self.nota_matematica >= 70 and self.nota_portugues >= 70 and self.nota_historia >= 70:
-            return True
+        if (self.nota_portugues + self.nota_matematica)/2 >= 70:
+            return 'Sim'
         else:
-            return False
+            return 'Não'
 
-aluno_1 = Alunos('Gabriel', 'Dornas', 37, 'Masculino', 68, 75, 80)
-aluno_1 = Alunos('Maria', 'José', 20, 'Feminino', 68, 75, 80)
-aluno_1 = Alunos('Maria', 'José', 20, 'Feminino', 68, 75, 80)
-aluno_1 = Alunos('Maria', 'José', 20, 'Feminino', 68, 75, 80)
-aluno_1 = Alunos('Maria', 'José', 20, 'Feminino', 68, 75, 80)
+    @classmethod
+    def do_arquivo_csv(cls, atributos):
+        return cls(atributos[0], atributos[1], atributos[2], atributos[3], atributos[4], atributos[5])
 
-""" print(aluno_1.nome)
-print(aluno_1.nota_portugues)
-aluno_1.add_nota('Português', 2)
-print(aluno_1.nota_portugues)
-print(aluno_1.nome_completo())
-print(aluno_1.passou_de_ano()) """
-print(Alunos.num_alunos)
+    @staticmethod
+    def dia_de_aula(year, month, day):
+        import datetime
+        minha_data = datetime.date(year, month, day).weekday()
+        if minha_data >= 4:
+            return 'Não é dia de aula'
+        else:
+            return 'É dia de aula'
+
+class Monitor(Alunos):
+    def __init__(self, nome, sobrenome, idade, genero, nota_portugues, nota_matematica, disciplina, alunos=[]):
+        super().__init__(nome, sobrenome, idade, genero, nota_portugues, nota_matematica)
+        self.disciplina = disciplina
+        self.alunos = alunos
+
+    def add_aluno(self, aluno):
+        if aluno not in self.alunos:
+            self.alunos.append(aluno)
+
+    def remove_aluno(self, aluno):
+        if aluno in self.alunos:
+            self.alunos.remove(aluno)
+
+monitor = Monitor('Júlio', 'Pereira', 40, 'Masculino,', 99, 70, 'Portugês')
+
+meus_alunos = []
+with open('alunos.csv') as arquivo:
+    import csv
+    reader = csv.reader(arquivo, delimiter=',')
+    for linha in reader:
+        aluno = Alunos.do_arquivo_csv(linha)
+        meus_alunos.append(aluno)
+
+for aluno in meus_alunos:
+    print(f'{aluno.nome_completo()} tirou {aluno.nota_matematica} em matemática e {aluno.nota_portugues} em português')
+
+
+monitor.add_aluno(meus_alunos[0])
+monitor.add_aluno(meus_alunos[-1])
+print(monitor.alunos)
+monitor.remove_aluno(meus_alunos[-1])
+print(monitor.alunos)
+

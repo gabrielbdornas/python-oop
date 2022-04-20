@@ -7,12 +7,6 @@
   # data = atributos
   # comportamentos = métodos
 
-class Employee:
-
-    def __init__(self, name, full_name):
-        self.name = name
-        self.full_name = full_name
-
 # Pense em uma classe como uma forma, que poderá ser utilizada para criação de vários objetos ao longo da exeução
 # de seu programa.
 
@@ -28,16 +22,32 @@ class Employee:
 
 # 1 - Cada instância criada será única
 
-# 2 -  Variáveis de instâncias são variáveis únicas para cada instância de uma classe
+class Employee:
 
-# 3 - Refatorando nosso código para criar variáveis de instância durante a criação da classe
-  # Evitar códigos repetidos
-  # Evitar erros
-  # Método especial __init__ - construtor
-  # __init__ recebe a instância automaticamente como primeiro argumento = self
-  # Utilizar self = empl_gabriel.last_name, mas agora será feito automaticamente
+  def __init__(self, first_name, last_name, pay):
+    self.first_name = first_name
+    self.last_name = last_name
+    self.email = f'{first_name.lower()}.{last_name.lower()}@company.com'
+    self.pay = pay
 
-# 4 - Full Name: Nosso primeiro método de classe
+  def full_name(self):
+    return f'{self.first_name} {self.last_name}'
+
+empl_1 = Employee('Gabriel', 'Dornas', 50000)
+empl_2 = Employee('Maria', 'Jose', 6000)
+empl_3 = Employee('Jose', 'Maria', 4000)
+
+print(empl_1.last_name)
+print(empl_2.last_name)
+
+print(empl_1.email)
+print(empl_2.email)
+
+print(empl_1.full_name())
+print(empl_2.full_name())
+print(empl_3.full_name())
+
+# 4 - Full Name: Método de classe
   # Possível realizar manualmente
   # Não esqueça do parênteses após full_name pois isto é um método e não um atributo
 
